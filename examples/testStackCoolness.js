@@ -1,11 +1,12 @@
 'use strict';
 
-var contraLog = require('../lib/')(module);
+var cl = require('../lib/')(module);
 var StackHelpers = require('../lib/').StackHelpers;
 
-console.log('StackHelpers:',StackHelpers);
+//console.log('StackHelpers:',StackHelpers);
+cl.trace('a trace from testStackCoolness!');
 
-contraLog.setOptions({
+cl.setOptions({
     level: 'trace',
     lineFormat: 'MSG: #msg\n' +
     '\t[MOD:#mod (FILE:#file) LINE:#line, COL:#col]\n' +
@@ -16,18 +17,18 @@ contraLog.setOptions({
 var server = require('./lib/server');
 
 
-// Now lets turn on only modules with 'serv' in the name (server and accountService):
 
-contraLog.off().on('#modules:serv'); // you could skip the off if you wanted to...
-contraLog.trace('TRACE from test example');
+cl.off().on('#modules:serv'); // you could skip the off if you wanted to...
+
+
 server.testGetAll();
 // but you should have seen:
 //  [server:14] server calling ac.getAll
 //    [accountService:21] RETURNING:
 //    [{"id":1,"name":"abby"},{"id":2,"name":"bill"},{"id":3,"name":"cate"},{"id":4,"name":"dave"}]
 
-contraLog.on();
-contraLog.debug('now you should see three more calls');
+cl.on();
+cl.debug('now you should see three more calls');
 server.testGet(2);
 
 //  [server:18] server calling ac.get(2)
