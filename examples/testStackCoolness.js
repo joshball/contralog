@@ -1,6 +1,10 @@
 'use strict';
 
 var contraLog = require('../lib/')(module);
+var StackHelpers = require('../lib/').StackHelpers;
+
+console.log('StackHelpers:',StackHelpers);
+
 contraLog.setOptions({
     level: 'trace',
     lineFormat: 'MSG: #msg\n' +
