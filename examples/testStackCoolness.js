@@ -16,16 +16,10 @@ cl.setOptions({
 
 var server = require('./lib/server');
 
-
-
 cl.off().on('#modules:serv'); // you could skip the off if you wanted to...
 
 
 server.testGetAll();
-// but you should have seen:
-//  [server:14] server calling ac.getAll
-//    [accountService:21] RETURNING:
-//    [{"id":1,"name":"abby"},{"id":2,"name":"bill"},{"id":3,"name":"cate"},{"id":4,"name":"dave"}]
 
 cl.on();
 cl.debug('now you should see three more calls');
