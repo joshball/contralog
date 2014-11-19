@@ -9,10 +9,10 @@ cl.trace('a trace from testStackCoolness!');
 cl.setOptions({
     level: 'trace',
     lineFormat: 'MSG: #msg\n' +
-    '\t[MOD:#mod (FILE:#file) LINE:#line, COL:#col]\n' +
-    '\t[isConstructor:#isConstructor (isEval:#isEval) isNative:#isNative, isToplevel:#isToplevel]\n' +
-    '\t[evalOrigin:#evalOrigin]\n' +
-    '\t[func:#func, method:#method, type:#type]'});
+    '[MOD:#mod (FILE:#file) LINE:#line, COL:#col]\n' +
+    '[isConstructor:#isConstructor (isEval:#isEval) isNative:#isNative, isToplevel:#isToplevel]\n' +
+    '[evalOrigin:#evalOrigin]\n' +
+    '[func:#func, method:#method, type:#type]'});
 
 var server = require('./lib/server');
 
@@ -29,6 +29,7 @@ server.testGetAll();
 
 cl.on();
 cl.debug('now you should see three more calls');
+cl.stack(1);
 server.testGet(2);
 
 //  [server:18] server calling ac.get(2)
