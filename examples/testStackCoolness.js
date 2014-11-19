@@ -8,7 +8,7 @@ cl.trace('a trace from testStackCoolness!');
 
 cl.setOptions({
     level: 'trace',
-    lineFormat: 'MSG: #msg\n' +
+    lineFormat: '#msg\n' +
     '[MOD:#mod (FILE:#file) LINE:#line, COL:#col]\n' +
     '[isConstructor:#isConstructor (isEval:#isEval) isNative:#isNative, isToplevel:#isToplevel]\n' +
     '[evalOrigin:#evalOrigin]\n' +
@@ -29,27 +29,21 @@ server.testGetAll();
 
 cl.on();
 cl.debug('now you should see three more calls');
-cl.stack(1);
 server.testGet(2);
 
-//  [server:18] server calling ac.get(2)
-//  [accountService:28] RETURNING:
-//  2
-//  [AccountController:20] RETURNING:
-//  2
+function m1(){
+    m2();
+}
+function m2(){
+    m3();
+}
+function m3(){
+    console.log('-- 1 ------------------------')
+    cl.stack();
+    console.log('-- 2 ------------------------')
+    cl.stack(0,3);
+    console.log('-- 3 ------------------------')
+    cl.stack(1,3, 'warn');
+}
 
-//conLog.off('#modules:serv');
-
-
-//conLog.off().on('#modules:serv');
-
-//conLog.trace('server calling ac.getAll');
-//conLog.trace('server calling ac.get(2)');
-//ac.get(2);
-//ac.get(12);
-//
-//dumpAll(contraLog, 'should dump only errors');
-//contraLog.setLevel('info');
-//dumpAll(contraLog, 'should dump only info, warnings and errors');
-//contraLog.resetOptions('level', 'warn');
-//dumpAll(contraLog, 'should dump everything');
+m1();
